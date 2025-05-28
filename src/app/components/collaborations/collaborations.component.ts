@@ -103,7 +103,12 @@ export class CollaborationsComponent {
   }
 
   // Close modal
-  closeModal(): void {
+  closeModal(event?: MouseEvent): void {
+    // Prevent event from bubbling up to parent elements
+    if (event) {
+      event.stopPropagation();
+      event.preventDefault();
+    }
     this.selectedCollab = null;
   }
 

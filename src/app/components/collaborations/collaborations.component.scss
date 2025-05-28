@@ -392,25 +392,34 @@
 
       .close-button {
         position: absolute;
-        top: 25px;
-        right: 25px;
-        background: rgba(139, 92, 246, 0.1);
-        border: 1px solid rgba(139, 92, 246, 0.2);
-        color: rgba(255, 255, 255, 0.8);
-        width: 40px;
-        height: 40px;
+        top: 15px;
+        right: 15px;
+        background: rgba(139, 92, 246, 0.3);
+        border: 2px solid rgba(139, 92, 246, 0.5);
+        color: rgba(255, 255, 255, 1);
+        width: 44px;
+        height: 44px;
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
         cursor: pointer;
         transition: all 0.3s ease;
-        z-index: 2;
+        z-index: 9999;
+        box-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
+        font-size: 1.2rem;
+        outline: none;
+        transform: translateZ(80px);
 
-        &:hover {
-          color: #8b5cf6;
-          background: rgba(139, 92, 246, 0.2);
-          transform: rotate(90deg);
+        &:hover, &:focus {
+          color: white;
+          background: rgba(139, 92, 246, 0.6);
+          transform: translateZ(80px) rotate(90deg);
+          border-color: white;
+        }
+
+        &:active {
+          transform: translateZ(80px) scale(0.9);
         }
       }
 

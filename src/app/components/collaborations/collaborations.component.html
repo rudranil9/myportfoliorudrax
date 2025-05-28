@@ -39,10 +39,10 @@
   </div>
 
   <!-- 3D Modal -->
-  <div class="modal-overlay" *ngIf="selectedCollab" (click)="closeModal()">
+  <div class="modal-overlay" *ngIf="selectedCollab" (click)="closeModal($event)">
     <div class="modal-container" (click)="$event.stopPropagation()">
       <div class="modal-content">
-        <button class="close-button" (click)="closeModal()">
+        <button class="close-button" (click)="closeModal($event)" aria-label="Close modal">
           <fa-icon [icon]="faTimes"></fa-icon>
         </button>
 
