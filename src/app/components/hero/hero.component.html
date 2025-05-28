@@ -1,0 +1,147 @@
+<section class="hero" id="hero">
+  <!-- Background Video Element -->
+  <video #heroVideo 
+         class="hero-video" 
+         [src]="videoSource"
+         autoplay 
+         loop 
+         muted 
+         playsinline 
+         preload="auto"
+         poster="assets/videos/hero-background-poster.jpg"
+         (loadeddata)="onVideoLoaded($event)"
+         (error)="onVideoError($event)">
+    <source [src]="videoSource" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <!-- Animated Gradient Overlay -->
+  <div class="hero-overlay"></div>
+  <div class="hero-particles"></div>
+
+  <!-- Content Over Video -->
+  <div class="hero-content">
+    <!-- Animated Text Section -->
+    <div class="intro-text" [@fadeInUp]>
+      <span class="pre-title">Welcome to my creative universe</span>
+      <div class="name-container">
+        <h1 class="hero-title">Hi, I'm Rudranil</h1>
+      </div>
+      
+      <!-- Profile Picture with Glow Effect (below name) -->
+      <div class="profile-picture-container">
+        <div class="profile-picture">
+          <img src="assets/images/profile.jpg" alt="Rudranil's Profile Picture">
+          <div class="glow-effect"></div>
+        </div>
+      </div>
+      
+      <span class="typing-text">I create {{currentRole}}</span>
+      <p class="hero-subtitle">Content Creator & Digital Storyteller</p>
+      
+      <div class="expertise-tags">
+        <span class="tag">Infotainment Content</span>
+        <span class="tag">Unique Storytelling</span>
+        <span class="tag">Digital Creations</span>
+        <span class="tag">Social Media Management</span>
+      </div>
+    </div>
+    
+    <!-- Social Media Stats with Modern Cards -->
+    <div class="social-stats" [@listAnimation]>
+      <div class="stat-item">
+        <div class="stat-icon facebook-gradient">
+          <fa-icon [icon]="['fab', 'facebook-f']"></fa-icon>
+        </div>
+        <div class="stat-info">
+          <span class="stat-number">325K+</span>
+          <span class="stat-platform">Facebook Followers</span>
+          <div class="stat-growth">
+            <fa-icon [icon]="['fas', 'chart-line']" class="growth-icon"></fa-icon>
+            <span>+25% this year</span>
+          </div>
+          <div class="stat-engagement">
+            <span>Avg. Reach: 1M+ monthly</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="stat-item">
+        <div class="stat-icon youtube-gradient">
+          <fa-icon [icon]="['fab', 'youtube']"></fa-icon>
+        </div>
+        <div class="stat-info">
+          <span class="stat-number">8K+</span>
+          <span class="stat-platform">YouTube Subscribers</span>
+          <div class="stat-growth">
+            <fa-icon [icon]="['fas', 'chart-line']" class="growth-icon"></fa-icon>
+            <span>+40% this year</span>
+          </div>
+          <div class="stat-engagement">
+            <span>10K+ monthly views</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="stat-item">
+        <div class="stat-icon instagram-gradient">
+          <fa-icon [icon]="['fab', 'instagram']"></fa-icon>
+        </div>
+        <div class="stat-info">
+          <span class="stat-number">5.5K+</span>
+          <span class="stat-platform">Instagram Followers</span>
+          <div class="stat-growth">
+            <fa-icon [icon]="['fas', 'chart-line']" class="growth-icon"></fa-icon>
+            <span>+35% this year</span>
+          </div>
+          <div class="stat-engagement">
+            <span>50K+ weekly reach</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Achievement Highlights -->
+    <div class="achievement-highlights" [@listAnimation]>
+      <div class="achievement-item">
+        <fa-icon [icon]="['fas', 'video']" class="achievement-icon"></fa-icon>
+        <span class="achievement-number">280+</span>
+        <span class="achievement-text">Videos Created</span>
+      </div>
+      
+      <div class="achievement-item">
+        <fa-icon [icon]="['fas', 'users']" class="achievement-icon"></fa-icon>
+        <span class="achievement-number">50M+</span>
+        <span class="achievement-text">Estimated Lifetime Reach</span>
+      </div>
+      
+      <div class="achievement-item">
+        <fa-icon [icon]="['fas', 'star']" class="achievement-icon"></fa-icon>
+        <span class="achievement-number">4.9</span>
+        <span class="achievement-text">Average Rating</span>
+      </div>
+      
+      
+    </div>
+    
+    <!-- CTA Buttons -->
+    <div class="hero-buttons">
+      <a [routerLink]="['/projects']" fragment="featured" class="hero-btn primary-btn">
+        <span class="btn-text">Explore My Work</span>
+        <span class="btn-icon">
+          <fa-icon [icon]="['fas', 'arrow-right']"></fa-icon>
+        </span>
+      </a>
+      
+      <a [routerLink]="['/contact']" class="hero-btn secondary-btn">
+        <span class="btn-text">Get In Touch</span>
+        <span class="btn-icon">
+          <fa-icon [icon]="['fas', 'envelope']"></fa-icon>
+        </span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Floating Social Links -->
+
+</section>

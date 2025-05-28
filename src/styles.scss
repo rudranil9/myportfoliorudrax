@@ -1,1 +1,413 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background: #0a0a0f;
+  color: #ffffff;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a2e;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3b82f6;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #60a5fa;
+}
+
+/* Common utility classes */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.section {
+  padding: 4rem 0;
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* Animation classes */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Owl Carousel customization */
+.owl-theme .owl-dots .owl-dot span {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.owl-theme .owl-dots .owl-dot.active span,
+.owl-theme .owl-dots .owl-dot:hover span {
+  background: #3b82f6;
+}
+
+/* App specific styles */
+app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  position: relative;
+  z-index: 1;
+}
+
+/* Component visibility */
+app-navbar,
+app-footer,
+app-hero,
+app-roadmap,
+app-social-showcase,
+app-testimonials,
+app-collaborations,
+app-contact {
+  display: block;
+  width: 100%;
+}
+
+/* Section styles */
+section {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  z-index: 2;
+  scroll-margin-top: 80px; /* Offset for fixed navbar */
+}
+
+/* Your custom styles below */
+
+html {
+  scroll-behavior: smooth;
+  height: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @apply text-white font-bold;
+}
+
+.section-header {
+  h1 {
+    @apply text-white;
+  }
+  h2 {
+    @apply text-white;
+  }
+  p {
+    @apply text-gray-300;
+  }
+}
+
+// Main content wrapper
+.app-content {
+  flex: 1 0 auto;
+  min-height: 100vh;
+  width: 100%;
+}
+
+// Footer styles
+app-footer {
+  flex-shrink: 0;
+  width: 100%;
+}
+
+:root {
+  --neon-primary: #0ff;
+  --neon-primary-rgb: 0, 255, 255;
+  --neon-secondary: #f0f;
+  --neon-secondary-rgb: 255, 0, 255;
+  --neon-text: #fff;
+  --neon-bg: #0a0a0f;
+  --neon-grid: rgba(15, 255, 255, 0.1);
+}
+
+/* Cyberpunk Grid Background */
+.cyber-grid {
+  background-image: 
+    linear-gradient(var(--neon-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--neon-grid) 1px, transparent 1px);
+  background-size: 30px 30px;
+  background-position: center center;
+}
+
+/* Neon Text Effect */
+.neon-text {
+  color: var(--neon-text);
+  text-shadow: 
+    0 0 5px var(--neon-primary),
+    0 0 10px var(--neon-primary),
+    0 0 20px var(--neon-primary);
+}
+
+.neon-text-alt {
+  color: var(--neon-text);
+  text-shadow: 
+    0 0 5px var(--neon-secondary),
+    0 0 10px var(--neon-secondary),
+    0 0 20px var(--neon-secondary);
+}
+
+/* Neon Border Effect */
+.neon-border {
+  border: 2px solid var(--neon-primary);
+  box-shadow: 
+    0 0 5px var(--neon-primary),
+    inset 0 0 5px var(--neon-primary);
+}
+
+.neon-border-alt {
+  border: 2px solid var(--neon-secondary);
+  box-shadow: 
+    0 0 5px var(--neon-secondary),
+    inset 0 0 5px var(--neon-secondary);
+}
+
+/* Glitch Effect */
+.glitch {
+  position: relative;
+  
+  &::before,
+  &::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  
+  &::before {
+    left: 2px;
+    text-shadow: -2px 0 var(--neon-primary);
+    animation: glitch-1 2s infinite linear alternate-reverse;
+  }
+  
+  &::after {
+    left: -2px;
+    text-shadow: 2px 0 var(--neon-secondary);
+    animation: glitch-2 3s infinite linear alternate-reverse;
+  }
+}
+
+@keyframes glitch-1 {
+  0% { clip-path: inset(20% 0 30% 0); }
+  20% { clip-path: inset(60% 0 10% 0); }
+  40% { clip-path: inset(40% 0 50% 0); }
+  60% { clip-path: inset(80% 0 5% 0); }
+  80% { clip-path: inset(10% 0 70% 0); }
+  100% { clip-path: inset(30% 0 20% 0); }
+}
+
+@keyframes glitch-2 {
+  0% { clip-path: inset(15% 0 35% 0); }
+  20% { clip-path: inset(55% 0 15% 0); }
+  40% { clip-path: inset(45% 0 45% 0); }
+  60% { clip-path: inset(75% 0 10% 0); }
+  80% { clip-path: inset(5% 0 75% 0); }
+  100% { clip-path: inset(25% 0 25% 0); }
+}
+
+/* Futuristic Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--neon-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3b82f6;
+  border-radius: 4px;
+  
+  &:hover {
+    background: #8b5cf6;
+  }
+}
+
+/* Smooth Scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Futuristic Button */
+.cyber-button {
+  position: relative;
+  padding: 1rem 2rem;
+  background: transparent;
+  color: #3b82f6;
+  border: 1px solid #3b82f6;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      120deg,
+      transparent,
+      rgba(59, 130, 246, 0.2),
+      transparent
+    );
+    transition: all 0.5s ease;
+  }
+  
+  &:hover {
+    background: #3b82f6;
+    color: #0f172a;
+    box-shadow: 0 0 20px #3b82f6;
+    
+    &::before {
+      left: 100%;
+    }
+  }
+}
+
+/* Button Styles */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  
+  &:focus {
+    outline: none;
+  }
+}
+
+.btn-primary {
+  @apply px-6 py-3 rounded-lg text-white font-medium;
+  background: linear-gradient(to right, #3b82f6, #8b5cf6);
+  box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2), 0 2px 4px -1px rgba(59, 130, 246, 0.1);
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background: linear-gradient(to right, #8b5cf6, #3b82f6);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.3), 0 4px 6px -2px rgba(59, 130, 246, 0.2);
+  }
+}
+
+.btn-secondary {
+  background: transparent;
+  color: #3b82f6;
+  border: 1px solid #3b82f6;
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.2);
+  
+  &:hover {
+    background: rgba(59, 130, 246, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+  }
+}
+
+/* Card Styles */
+.card {
+  @apply rounded-xl p-6 border border-gray-800;
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  
+  &:hover {
+    border-color: #3b82f6;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.2);
+  }
+}
+
+/* AOS Essential Styles */
+[data-aos] {
+  pointer-events: none;
+  &.aos-animate {
+  pointer-events: auto;
+}
+}
+
+[data-aos][data-aos][data-aos-duration="400"],
+body[data-aos-duration="400"] [data-aos] {
+  transition-duration: 400ms;
+}
+
+[data-aos][data-aos][data-aos-delay="100"],
+body[data-aos-delay="100"] [data-aos] {
+  transition-delay: 0;
+  &.aos-animate {
+    transition-delay: 100ms;
+  }
+}
+
+[data-aos^=fade][data-aos^=fade] {
+  opacity: 0;
+  transition-property: opacity,transform;
+  &.aos-animate {
+    opacity: 1;
+    transform: translateZ(0);
+  }
+}
+
+[data-aos=fade-up] {
+  transform: translate3d(0,100px,0);
+}
+
+[data-aos=fade-down] {
+  transform: translate3d(0,-100px,0);
+}
+
+[data-aos=fade-right] {
+  transform: translate3d(-100px,0,0);
+}
+
+[data-aos=fade-left] {
+  transform: translate3d(100px,0,0);
+}
+

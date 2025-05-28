@@ -1,0 +1,62 @@
+<section id="roadmap" class="cyber-roadmap-section">
+  <!-- Background elements -->
+  <div class="cyber-grid"></div>
+  <div class="cyber-glow-1"></div>
+  <div class="cyber-glow-2"></div>
+  
+  <div class="container">
+    <!-- Cyber Header -->
+    <div class="cyber-header">
+      <h2 class="cyber-text-glitch" data-text="My Journey">My Journey</h2>
+      <div class="cyber-line"></div>
+      <p class="cyber-subtitle">Career <span class="cyber-badge">Timeline</span></p>
+    </div>
+
+    <!-- Cyber Roadmap Container -->
+    <div class="cyber-roadmap-container" [@cyberReveal] [ngStyle]="{'height': (roadmapItems.length * 240) + 240 + 'px'}">
+      <!-- Digital Road Path -->
+      <div class="cyber-road-path">
+        <div class="road-scanner"></div>
+      </div>
+
+      <!-- Year Markers -->
+      <ng-container *ngFor="let year of getUniqueYears(); let i = index">
+        <div class="cyber-year-marker" 
+             [style.top]="(i * 280) + 100 + 'px'">
+          <div class="year-node"></div>
+          <div class="year-text">{{ year }}</div>
+        </div>
+      </ng-container>
+
+      <!-- Milestones -->
+      <ng-container *ngFor="let item of roadmapItems; let i = index">
+        <div class="cyber-milestone" 
+             [class.left]="i % 2 === 0" 
+             [class.right]="i % 2 !== 0"
+             [style.top]="(i * 240) + 80 + 'px'"
+             [ngStyle]="{'--milestone-color': getMilestoneColor(item.color)}">
+          
+          <div class="milestone-badge" [class.completed]="item.completed">
+            {{ item.completed ? 'Completed' : 'In Progress' }}
+          </div>
+          
+          <div class="milestone-icon">
+            <fa-icon [icon]="item.icon" [fixedWidth]="true"></fa-icon>
+          </div>
+          
+          <div class="milestone-date">{{ item.month }} {{ item.year }}</div>
+          <h3 class="milestone-title">{{ item.title }}</h3>
+          <p class="milestone-description">{{ item.description }}</p>
+        </div>
+      </ng-container>
+    </div>
+    
+    <!-- Progress Stats -->
+    <div class="mt-12 text-center">
+      <div class="inline-block bg-gray-900 bg-opacity-50 px-4 py-2 rounded-lg border border-blue-400 border-opacity-30 shadow-lg">
+        <span class="text-blue-300">Journey Progress: </span>
+        <span class="text-white font-bold">{{ getProgressPercentage() }}%</span>
+      </div>
+    </div>
+  </div>
+</section>

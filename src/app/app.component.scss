@@ -1,0 +1,280 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+:host {
+  display: block;
+  min-height: 100vh;
+  background: #0a0a0f;
+  overflow-x: hidden;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  width: 100%;
+
+  &::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+      linear-gradient(90deg, rgba(59, 130, 246, 0.05) 1px, transparent 1px) 0 0 / 50px 50px,
+      linear-gradient(0deg, rgba(59, 130, 246, 0.05) 1px, transparent 1px) 0 0 / 50px 50px;
+    opacity: 0.2;
+    z-index: 0;
+    pointer-events: none;
+    animation: grid-flow 20s linear infinite;
+  }
+}
+
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  width: 100%;
+  background: var(--neon-bg);
+
+  &::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+      linear-gradient(90deg, var(--neon-grid) 1px, transparent 1px) 0 0 / 50px 50px,
+      linear-gradient(0deg, var(--neon-grid) 1px, transparent 1px) 0 0 / 50px 50px;
+    opacity: 0.2;
+    z-index: 0;
+    pointer-events: none;
+    animation: grid-flow 20s linear infinite;
+  }
+}
+
+.app-content {
+  flex: 1;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  margin: 0 auto;
+  max-width: 1920px;
+}
+
+app-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  height: 80px;
+  background: rgba(10, 10, 15, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--neon-grid);
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      var(--neon-primary),
+      var(--neon-secondary),
+      var(--neon-primary)
+    );
+    animation: border-flow 3s linear infinite;
+  }
+}
+
+app-footer {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  background: rgba(10, 10, 15, 0.95);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid var(--neon-grid);
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      var(--neon-primary),
+      var(--neon-secondary),
+      var(--neon-primary)
+    );
+    animation: border-flow 3s linear infinite reverse;
+  }
+}
+
+app-hero {
+  display: block;
+  min-height: 100vh;
+  margin-top: 0;
+  position: relative;
+  z-index: 2;
+}
+
+app-roadmap {
+  display: block;
+  min-height: 100vh;
+  position: relative;
+  z-index: 2;
+}
+
+app-social-showcase {
+  display: block;
+  min-height: 100vh;
+  position: relative;
+  z-index: 2;
+}
+
+app-testimonials {
+  display: block;
+  min-height: 100vh;
+  position: relative;
+  z-index: 2;
+}
+
+app-collaborations {
+  display: block;
+  min-height: 100vh;
+  position: relative;
+  z-index: 2;
+}
+
+app-contact {
+  display: block;
+  min-height: 100vh;
+  position: relative;
+  z-index: 2;
+}
+
+// Global section styles
+section {
+  position: relative;
+  overflow: hidden;
+  z-index: 2;
+  scroll-margin-top: 80px; // For smooth scrolling with fixed navbar
+}
+
+// Container styles
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  position: relative;
+  z-index: 2;
+
+  @media (min-width: 768px) {
+    padding: 0 2rem;
+  }
+}
+
+// Global animations
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Utility classes
+.section-padding {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+
+// Section title styles
+.section-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 3rem;
+  color: white;
+  position: relative;
+  
+  @media (min-width: 768px) {
+    font-size: 3rem;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 2px;
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+  }
+}
+
+.section-subtitle {
+  font-size: 1.2rem;
+  text-align: center;
+  color: #94a3b8;
+  max-width: 800px;
+  margin: 0 auto 4rem;
+  
+  @media (min-width: 768px) {
+    font-size: 1.4rem;
+  }
+}
+
+// Fix for AOS animations
+[data-aos] {
+  pointer-events: none;
+}
+
+[data-aos].aos-animate {
+  pointer-events: auto;
+}
+
+// Ensure correct stacking
+router-outlet {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes grid-flow {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(50px);
+  }
+}
+
+@keyframes border-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}

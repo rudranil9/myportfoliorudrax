@@ -1,0 +1,107 @@
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
+import { ViewportScroller } from '@angular/common';
+import { Subject } from 'rxjs';
+import { takeUntil, debounceTime } from 'rxjs/operators';
+
+interface MenuItem {
+  name: string;
+  link: string[];
+  fragment: string;
+}
+
+@Component({
+  selector: 'app-navbar',
+  templateUrl: './navbar.component.html',
+  styleUrls: ['./navbar.component.scss']
+})
+export class NavbarComponent implements OnInit, OnDestroy {
+  // Define menu items with section IDs for single page navigation
+  menuItems: MenuItem[] = [
+    { name: 'Home', link: ['#home'], fragment: 'home' },
+    { name: 'About', link: ['#about'], fragment: 'about' },
+    { name: 'Journey', link: ['#roadmap'], fragment: 'roadmap' },
+    { name: 'Social', link: ['#social'], fragment: 'social' },
+    { name: 'Testimonials', link: ['#testimonials'], fragment: 'testimonials' },
+    { name: 'Work', link: ['#collaborations'], fragment: 'collaborations' },
+    { name: 'Contact', link: ['#contact'], fragment: 'contact' }
+  ];
+
+  private destroy$ = new Subject<void>();
+  private scrollSubject = new Subject<void>();
+  
+  isScrolled = false;
+  isMobileMenuOpen = false;
+  activeSection = 'home';
+
+  constructor(private viewportScroller: ViewportScroller) {}
+
+  ngOnInit(): void {
+    // Handle scroll events with debounce
+    this.setupScrollListener();
+    
+    // Subscribe to scroll events
+    this.scrollSubject.pipe(
+      debounceTime(50),
+      takeUntil(this.destroy$)
+    ).subscribe(() => {
+      this.handleScroll();
+      this.updateActiveSectionFromScroll();
+    });
+  }
+  
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  scrollToSection(fragment: string, event?: Event): void {
+    if (event) {
+      event.preventDefault();
+    }
+    this.activeSection = fragment;
+    const element = document.getElementById(fragment);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    this.isMobileMenuOpen = false;
+  }
+
+  @HostListener('window:scroll')
+  onWindowScroll(): void {
+    this.scrollSubject.next();
+  }
+  
+  private setupScrollListener(): void {
+    if (typeof window !== 'undefined') {
+      window.addEventListener('scroll', () => this.onWindowScroll(), { passive: true });
+    }
+  }
+  
+  private handleScroll(): void {
+    this.isScrolled = window.pageYOffset > 50;
+  }
+  
+  private updateActiveSectionFromScroll(): void {
+    const sections = ['home', 'about', 'roadmap', 'social', 'testimonials', 'collaborations', 'contact'];
+    
+    for (const section of sections) {
+      const element = document.getElementById(section);
+      if (element) {
+        const rect = element.getBoundingClientRect();
+        if (rect.top <= 100 && rect.bottom >= 100) {
+          this.activeSection = section;
+          break;
+        }
+      }
+    }
+  }
+  
+  toggleMobileMenu(): void {
+    this.isMobileMenuOpen = !this.isMobileMenuOpen;
+    if (this.isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+  }
+}

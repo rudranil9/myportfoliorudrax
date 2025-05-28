@@ -1,0 +1,89 @@
+<section id="contact" class="contact-section">
+    <div class="container mx-auto py-12 px-4">
+      <h2 class="text-4xl font-bold text-center mb-8 text-white">Get in Touch</h2>
+      <p class="text-center text-gray-400 mb-8">
+        I'd love to hear from you! Whether it's about collaborations or just a friendly hello, drop me a message at <a href="mailto:{{contactEmail}}" class="text-blue-400 hover:text-blue-300">{{contactEmail}}</a>
+      </p>
+      <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="contact-form max-w-xl mx-auto">
+        <div class="mb-4">
+          <label class="block text-gray-300 mb-2" for="name">Name</label>
+          <input
+            type="text"
+            id="name"
+            formControlName="name"
+            class="w-full p-3 rounded bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Your Name"
+            [ngClass]="{'border-red-500': nameControl?.invalid && nameControl?.touched}"
+          />
+          <div *ngIf="nameControl?.invalid && nameControl?.touched" class="text-red-500 mt-1 text-sm">
+            <span *ngIf="nameControl?.errors?.['required']">Name is required</span>
+            <span *ngIf="nameControl?.errors?.['minlength']">Name must be at least 2 characters</span>
+          </div>
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-300 mb-2" for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            formControlName="email"
+            class="w-full p-3 rounded bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="you@example.com"
+            [ngClass]="{'border-red-500': emailControl?.invalid && emailControl?.touched}"
+          />
+          <div *ngIf="emailControl?.invalid && emailControl?.touched" class="text-red-500 mt-1 text-sm">
+            <span *ngIf="emailControl?.errors?.['required']">Email is required</span>
+            <span *ngIf="emailControl?.errors?.['email']">Please enter a valid email</span>
+          </div>
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-300 mb-2" for="subject">Subject</label>
+          <input
+            type="text"
+            id="subject"
+            formControlName="subject"
+            class="w-full p-3 rounded bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="What's this about?"
+            [ngClass]="{'border-red-500': subjectControl?.invalid && subjectControl?.touched}"
+          />
+          <div *ngIf="subjectControl?.invalid && subjectControl?.touched" class="text-red-500 mt-1 text-sm">
+            <span *ngIf="subjectControl?.errors?.['required']">Subject is required</span>
+          </div>
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-300 mb-2" for="message">Message</label>
+          <textarea
+            id="message"
+            rows="5"
+            formControlName="message"
+            class="w-full p-3 rounded bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Your message..."
+            [ngClass]="{'border-red-500': messageControl?.invalid && messageControl?.touched}"
+          ></textarea>
+          <div *ngIf="messageControl?.invalid && messageControl?.touched" class="text-red-500 mt-1 text-sm">
+            <span *ngIf="messageControl?.errors?.['required']">Message is required</span>
+            <span *ngIf="messageControl?.errors?.['minlength']">Message must be at least 10 characters</span>
+          </div>
+        </div>
+        <!-- Success Message -->
+        <div *ngIf="submitSuccess" class="mb-4 p-3 bg-green-500 text-white rounded">
+          Message sent successfully! We'll get back to you soon.
+        </div>
+        <!-- Error Message -->
+        <div *ngIf="submitError" class="mb-4 p-3 bg-red-500 text-white rounded">
+          There was an error sending your message. Please try again.
+        </div>
+        <div class="text-center">
+          <button 
+            type="submit" 
+            class="btn"
+            [disabled]="isSubmitting || contactForm.invalid"
+            [ngClass]="{'opacity-50 cursor-not-allowed': isSubmitting || contactForm.invalid}"
+          >
+            <span *ngIf="!isSubmitting">Send Message</span>
+            <span *ngIf="isSubmitting">Sending...</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+  

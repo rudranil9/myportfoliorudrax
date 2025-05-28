@@ -1,0 +1,134 @@
+<nav class="fixed w-full z-50 transition-all duration-300 bg-gradient-to-b from-gray-900/95 to-transparent" [ngClass]="{'shadow-2xl backdrop-blur-sm': isScrolled}">
+  <!-- Neon border effect -->
+  <div class="neon-border"></div>
+  
+  <div class="container mx-auto px-4">
+    <div class="flex justify-between items-center h-20">
+      <!-- Enhanced Logo with Cyberpunk Effect -->
+      <a (click)="scrollToSection('hero', $event)" class="logo-container relative cursor-pointer group">
+        <div class="logo-glitch-wrapper">
+          <div class="logo-glitch" data-text="RudraX">RudraX</div>
+          <div class="logo-glow"></div>
+          <div class="logo-scanline"></div>
+        </div>
+        <div class="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+      </a>
+
+      <!-- Desktop Menu and Social Media Container with better spacing -->
+      <div class="hidden md:flex items-center justify-between flex-1 ml-8">
+        <!-- Main Navigation Menu (without Journey button) -->
+        <div class="flex space-x-1 bg-gray-900/70 backdrop-blur-md rounded-full p-1 border border-gray-800/50 shadow-lg nav-menu-container">
+          <a *ngFor="let item of filteredMenuItems" 
+             (click)="scrollToSection(item.fragment, $event)"
+             class="relative px-5 py-2 rounded-full transition-all duration-300 font-medium cursor-pointer group"
+             [ngClass]="{
+               'text-white nav-item-active': activeSection === item.fragment,
+               'text-gray-300 hover:text-white': activeSection !== item.fragment
+             }">
+            <span class="relative z-10 flex items-center">
+              {{item.name}}
+              <span *ngIf="activeSection === item.fragment" class="ml-2 w-1.5 h-1.5 rounded-full bg-blue-400 shadow-[0_0_10px_2px_rgba(96,165,250,0.7)]"></span>
+            </span>
+            <span class="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+            <span *ngIf="activeSection === item.fragment" 
+                  class="absolute -bottom-1 left-1/2 w-1/2 h-0.5 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full transform -translate-x-1/2 shadow-[0_0_10px_1px_rgba(96,165,250,0.7)]"></span>
+          </a>
+        </div>
+        
+        <!-- Right Side - Social Media Icons and Connect Button -->
+        <div class="flex items-center space-x-6 ml-auto">
+          <!-- Social Media Badges with Enhanced Glow -->
+          <div class="flex items-center space-x-4 social-stats mr-3">
+            <a href="https://facebook.com/rudraxyt" target="_blank" class="social-badge facebook-badge cyber-glow hover:scale-110 transition-all duration-300" style="--glow-color: 59, 130, 246">
+              <fa-icon [icon]="faFacebook" class="text-blue-400"></fa-icon>
+              <span class="stats">325K+</span>
+            </a>
+            <a href="https://www.youtube.com/@rudraxyt" target="_blank" class="social-badge youtube-badge cyber-glow hover:scale-110 transition-all duration-300" style="--glow-color: 239, 68, 68">
+              <fa-icon [icon]="faYoutube" class="text-red-500"></fa-icon>
+              <span class="stats">8K+</span>
+            </a>
+            <a href="https://instagram.com/risewithrudrax" target="_blank" class="social-badge instagram-badge cyber-glow hover:scale-110 transition-all duration-300" style="--glow-color: 236, 72, 153">
+              <fa-icon [icon]="faInstagram" class="text-pink-500"></fa-icon>
+              <span class="stats">5.5K+</span>
+            </a>
+          </div>
+          
+          <!-- Connect Button (positioned at extreme right) -->
+          <button (click)="scrollToSection('contact', $event)" 
+                  class="relative px-6 py-2.5 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full hover:shadow-lg hover:shadow-blue-500/30 transition-all duration-300 group overflow-hidden connect-btn">
+            <span class="relative z-10 flex items-center">
+              <span class="mr-2">🤝</span>
+              Let's Connect
+            </span>
+            <span class="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+            <span class="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full opacity-0 group-hover:opacity-30 blur-md group-hover:animate-pulse"></span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button class="md:hidden p-2 rounded-full bg-gray-800/50 backdrop-blur-sm border border-gray-700 hover:bg-gray-700/50 transition-all" 
+              (click)="toggleMobileMenu()" 
+              aria-label="Toggle menu">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div class="md:hidden transition-all duration-500 ease-in-out overflow-hidden bg-gradient-to-b from-gray-900 to-gray-900/95 backdrop-blur-lg" 
+       [ngClass]="{'max-h-0 opacity-0': !isMobileMenuOpen, 'max-h-screen opacity-100': isMobileMenuOpen}">
+    <div class="px-4 py-6 space-y-2">
+      <div class="flex items-center justify-between mb-6 px-2">
+        <div class="relative">
+          <span class="text-2xl font-extrabold bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+            RudraX
+          </span>
+          <span class="absolute inset-0 text-2xl font-extrabold text-blue-400/30 blur-md">RudraX</span>
+        </div>
+        <button (click)="toggleMobileMenu()" class="p-2 text-gray-400 hover:text-white">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      
+      <div class="space-y-1">
+        <a *ngFor="let item of menuItems" 
+           (click)="scrollToSection(item.fragment, $event)"
+           class="group flex items-center px-4 py-3 rounded-xl text-base font-medium transition-all duration-300"
+           [ngClass]="{
+             'text-white bg-gradient-to-r from-blue-500/10 to-purple-500/10': activeSection === item.fragment,
+             'text-gray-300 hover:text-white hover:bg-gray-800/50': activeSection !== item.fragment
+           }">
+          <span class="relative z-10">{{item.name}}</span>
+          <span *ngIf="activeSection === item.fragment" class="ml-2 w-2 h-2 rounded-full bg-blue-400 shadow-[0_0_10px_2px_rgba(96,165,250,0.7)]"></span>
+        </a>
+      </div>
+      
+      <button (click)="scrollToSection('contact', $event)" 
+              class="w-full mt-4 px-6 py-3 rounded-xl text-base font-medium text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 transition-all duration-300 flex items-center justify-center space-x-2">
+        <span>🤝</span>
+        <span>Let's Connect</span>
+      </button>
+      
+      <!-- Mobile Social Icons -->
+      <div class="flex justify-center space-x-6 mt-8 pt-6 border-t border-gray-800">
+        <a href="#" class="social-badge" style="--color: 59, 130, 246">
+          <fa-icon [icon]="faFacebook" class="text-blue-400"></fa-icon>
+          <span class="text-sm font-medium text-white/90">325K+</span>
+        </a>
+        <a href="#" class="social-badge" style="--color: 239, 68, 68">
+          <fa-icon [icon]="faYoutube" class="text-red-500"></fa-icon>
+          <span class="text-sm font-medium text-white/90">8K+</span>
+        </a>
+        <a href="#" class="social-badge" style="--color: 236, 72, 153">
+          <fa-icon [icon]="faInstagram" class="text-pink-500"></fa-icon>
+          <span class="text-sm font-medium text-white/90">5.5K+</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>

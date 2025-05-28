@@ -1,0 +1,609 @@
+// Fix to ensure all elements are visible by default
+.platform-card,
+.content-card,
+.social-cta-btn,
+.stat-box,
+[data-aos] {
+  opacity: 1 !important;
+  transform: none !important;
+  visibility: visible !important;
+}
+
+// Paper-like animations keyframes
+@keyframes float-paper {
+  0% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-5px) rotate(0.5deg); }
+  50% { transform: translateY(0) rotate(-0.3deg); }
+  75% { transform: translateY(-3px) rotate(0.2deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+}
+
+@keyframes paper-wave {
+  0% { transform: rotate3d(0, 0, 0, 0deg); }
+  25% { transform: rotate3d(1, 0, 0, 1deg); }
+  50% { transform: rotate3d(0, 1, 0, 1deg); }
+  75% { transform: rotate3d(1, 0, 0, -1deg); }
+  100% { transform: rotate3d(0, 0, 0, 0deg); }
+}
+
+@keyframes paper-fold {
+  0% { transform: perspective(1200px) rotateX(0) rotateY(0); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+  100% { transform: perspective(1200px) rotateX(2deg) rotateY(-2deg); box-shadow: 10px 15px 25px rgba(0,0,0,0.4); }
+}
+
+@keyframes paper-shadow {
+  0% { box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+  50% { box-shadow: 0 15px 30px rgba(0,0,0,0.3); }
+  100% { box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+}
+
+.social-showcase-section {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  
+  .platform-card {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation: float-paper 8s ease-in-out infinite;
+    transform-style: preserve-3d;
+    will-change: transform, box-shadow;
+    z-index: 1; // Ensure card has a proper z-index
+    
+    // Each card has a different animation delay for staggered effect
+    &:nth-child(1) { animation-delay: 0s; }
+    &:nth-child(2) { animation-delay: 0.6s; }
+    &:nth-child(3) { animation-delay: 1.2s; }
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.05), transparent 70%);
+      pointer-events: none; // Make sure this doesn't block clicks
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      z-index: 0; // Lower z-index for background effects
+    }
+
+    .card-3d-container, .card-3d-wrapper {
+      position: relative;
+      z-index: 2; // Higher z-index
+      pointer-events: auto; // Explicitly enable pointer events
+      transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+    
+    .social-card {
+      pointer-events: auto; // Ensure clicks pass through
+    }
+
+    &:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      animation-play-state: paused;
+      
+      &::before {
+        opacity: 1;
+      }
+      
+      .card-3d-wrapper {
+        animation: paper-wave 3s ease infinite;
+        transform: perspective(1200px) rotateX(2deg) rotateY(-2deg);
+      }
+      
+      .social-card {
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+      }
+    }
+  }
+  
+  // Add subtle paper effect to the stat boxes
+  .stat-box {
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    position: relative;
+    transform-style: preserve-3d;
+    
+    // Paper-like shadow
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    &:hover {
+      transform: translateY(-3px) scale(1.03);
+      border-color: rgba(255, 255, 255, 0.25);
+      
+      &::after {
+        opacity: 1;
+      }
+    }
+  }
+
+  // Enhanced Instagram Card
+  .platform-card:nth-child(2) {
+    background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+    box-shadow: 0 0 30px rgba(253, 29, 29, 0.3);
+    
+    &::before {
+      background: radial-gradient(circle at top right, rgba(255,255,255,0.2) 0%, transparent 70%);
+    }
+
+    .stat-box {
+      background: linear-gradient(135deg, rgba(131, 58, 180, 0.3), rgba(253, 29, 29, 0.3));
+      border-color: rgba(252, 176, 69, 0.3);
+    }
+
+    &:hover {
+      box-shadow: 0 0 50px rgba(253, 29, 29, 0.4);
+    }
+  }
+
+  // Paper folding effect for card elements
+  .card-3d-front, .social-card {
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform-style: preserve-3d;
+    position: relative;
+    z-index: 5;
+    
+    // Add subtle paper texture overlay
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4AkZCTMzBamv+gAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAADHUlEQVRo3u2avW7bMBSFP9tJnSYFUsfo0LUbO/QF/ArZu/Q9OuUNOhbI1Nl5gHbIUiBTl6JTUiCFkY4cqBJlSZbsWE4CkABh6PL+Hz6+ugQzmJWJAWZyroCXQLxybW5F4LMyeV4b4ZWJReB5KbdHZfJcKbdXJr4BngXeqNWi9qJC6LNJmfhkRQBl8lyZWAgcAu+AHeAK8ICID4S4NlKpVpk8SqvnHIZRlgDvlYm9sQqNvNxZcSdvgE/AxXMoQoW/ysSXwOdWE3GtO7uBx08LZBW6VCZO6mxLf0hBl8rkbgL1ZjgMSKl8GWKGrDJxxooPCU5YITKwP5SINGBlcXt9IKQBEPPOwMbQLlRXJt4G3grRlmtlTwxOb+lQ61oWRNSrEbVXXR+j3d61Ixn20YLUXRNbKiQNSUTn0t4FhFQUHgRSFVr3gFxXqZfhJbK+IPeB5HZyM3wy9j1JDGlWO7kZ7YhJZQgYOcKSyVL+OeV2gWgVGSIxSF/n/P6VqjHdBKKbmBsYRgagGcTdJPE7gHQGUa+UKtHgSTsRREsWN7VHCwcqE+8ZEEZLJVk14ykgahDV00RvuHAQiUxuF4jZaAmtNSTSQkTT3ChmRJr2RCswq0hsB7mRYhCSuDZSgEeXLi0gGiA80lKk6m6kJqLliqG4jZTJ7QyikTsOxXKDVbWVX+lP1xEZ3IeW2UeZfKfTcWXirTUk7g6wLqd6h9ZOZXLNAv5cmXhTJrdzq7gycR3E65UktgfYx2kzLKFwu7XdHWAAmUeXSCHwXBsZXDGS6FQm3wHPyuRaYKnrCmK7YCmTK5Eha1OlJZJLtJTGzx3E9iITSxDlIeUVlq/7gNieXA/JJbm7s1/isCNIbwpWmFl1UEZ0eCklbCT9gGzEbWTyOX87yWl8bJBy2rHI7QWYr3i1KkU6DbnUUlvmFRB/Vt7hIxJtZVQ2RlZaQvErfNsZJA1JjPJO1xqkQeKUQNJQxCgtK05IAWIh8XzLFSR9ChDbOw2I7a0BYnvBxRWXvyWFf/Xu9QfUr4qTfOI3mwAAAABJRU5ErkJggg==');
+      opacity: 0.03;
+      pointer-events: none;
+      z-index: -1;
+      mix-blend-mode: overlay;
+    }
+  }
+  
+  // Ensure content is above the paper texture
+  .social-card {
+    border-radius: 1rem !important; // Ensure consistent border radius
+    overflow: hidden !important; // Ensure content doesn't overflow
+    
+    * {
+      position: relative;
+      z-index: 10;
+    }
+    
+    // Specific fix for YouTube card
+    &.shadow-red-glow {
+      border-radius: 1rem !important;
+      overflow: hidden !important;
+      box-shadow: 0 0 30px rgba(220, 38, 38, 0.5), 0 0 60px rgba(248, 113, 113, 0.2) !important;
+    }
+    
+    // Fix for icon containers - ensure icons are fully visible
+    .w-24.h-24 {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      
+      fa-icon {
+        // Ensure icon is fully visible and properly sized
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 100% !important;
+        height: auto !important;
+        position: relative !important;
+        line-height: 1 !important;
+        
+        &::ng-deep svg {
+          width: 36px !important;
+          height: 36px !important;
+          display: inline-flex !important;
+          margin: auto !important;
+        }
+      }
+    }
+  }
+  
+  // Enhanced button animations for paper-like effect
+  a[href], button {
+    transform-style: preserve-3d;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+    pointer-events: auto !important; // Force pointer events to be enabled
+    cursor: pointer; // Ensure cursor shows as pointer
+    z-index: 10; // Higher z-index to ensure clickability
+    
+    // Paper fold effect
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent 80%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none; // Don't block clicks
+      z-index: -1; // Behind the content
+    }
+    
+    &:hover {
+      transform: translateY(-2px) scale(1.02);
+      
+      &::after {
+        opacity: 1;
+      }
+    }
+    
+    &:active {
+      transform: translateY(1px) scale(0.98);
+    }
+  }
+  
+  // Paper-like button animation
+  .social-btn, [class*="-btn"] {
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    font-weight: bold;
+    padding: 0.75rem 2rem;
+    border-radius: 9999px;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    will-change: transform, box-shadow;
+    transform-style: preserve-3d;
+    display: block; // Ensure full block display
+    
+    // Paper shine effect
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
+      transform: translateX(-100%);
+      transition: transform 0.6s ease;
+      pointer-events: none; // Don't interfere with clicks
+      z-index: 1; // Above base button but below text
+    }
+
+    &:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      
+      &::before {
+        transform: translateX(100%);
+      }
+    }
+    
+    &:active {
+      transform: translateY(1px) scale(0.98);
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    }
+  }
+  
+  // Fix for links in cards
+  .social-card a, .social-cta-btn a {
+    position: relative;
+    z-index: 20; // Very high z-index
+    pointer-events: auto !important;
+  }
+  
+  // Animated glow keyframes
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 10px rgba(255, 255, 255, 0.3), 0 0 20px rgba(56, 189, 248, 0.2); }
+    50% { box-shadow: 0 0 15px rgba(255, 255, 255, 0.4), 0 0 30px rgba(56, 189, 248, 0.4); }
+  }
+  
+  @keyframes text-glow {
+    0%, 100% { text-shadow: 0 0 5px rgba(255, 255, 255, 0.3), 0 0 10px rgba(56, 189, 248, 0.2); }
+    50% { text-shadow: 0 0 10px rgba(255, 255, 255, 0.4), 0 0 15px rgba(56, 189, 248, 0.4); }
+  }
+  
+  // Light glow effect for the Ready to Join My Community section
+  .cta-container {
+    animation: pulse-glow 3s infinite ease-in-out;
+    
+    h3 {
+      animation: text-glow 2s infinite ease-in-out;
+    }
+  }
+  
+  // Fix for the social CTA buttons in the "Ready to Join My Community" section
+  .social-cta-btn {
+    position: relative;
+    overflow: visible !important;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    
+    .social-cta-btn-icon {
+      position: relative;
+      overflow: visible !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      width: 40px !important;
+      height: 40px !important;
+      padding: 0 !important;
+      animation: pulse-glow 2.5s infinite ease-in-out;
+      animation-delay: calc(var(--icon-delay, 0) * 0.5s);
+      
+      fa-icon {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 24px !important;
+        height: 24px !important;
+        overflow: visible !important;
+        
+        &::ng-deep svg {
+          width: 20px !important;
+          height: 20px !important;
+          display: inline-flex !important;
+          margin: auto !important;
+          overflow: visible !important;
+        }
+      }
+    }
+    
+    &:nth-child(1) .social-cta-btn-icon {
+      --icon-delay: 0;
+    }
+    
+    &:nth-child(2) .social-cta-btn-icon {
+      --icon-delay: 1;
+    }
+    
+    &:nth-child(3) .social-cta-btn-icon {
+      --icon-delay: 2;
+    }
+    
+    &:hover {
+      transform: translateY(-5px) scale(1.05);
+      
+      .social-cta-btn-icon {
+        animation: none;
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.5), 0 0 30px rgba(56, 189, 248, 0.5);
+      }
+    }
+  }
+  
+  // Fix for all FontAwesome icons to ensure they're fully visible
+  fa-icon {
+    overflow: visible !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    position: relative !important;
+    top: 0 !important;
+    
+    &::ng-deep svg {
+      overflow: visible !important;
+      position: relative !important;
+      top: 0 !important;
+    }
+  }
+  
+  // Specific fix for the featured content card icons that are cropped from the top
+  .flex.items-center.gap-1\.5.bg-blue-600,
+  .flex.items-center.gap-1\.5.bg-red-600,
+  .flex.items-center.gap-1\.5.bg-purple-600,
+  [class*="bg-"].flex.items-center.gap-1\.5 {
+    padding-top: 6px !important;
+    padding-bottom: 6px !important;
+    
+    fa-icon {
+      font-size: 12px !important;
+      height: 12px !important;
+      margin-top: 0px !important;
+      position: relative !important;
+      top: 0 !important;
+      
+      &::ng-deep svg {
+        height: 12px !important;
+        width: 12px !important;
+      }
+    }
+  }
+
+  .facebook-btn {
+    background-color: #1877f2;
+    color: white;
+    &:hover {
+      background-color: #0d6efd;
+    }
+  }
+
+  .instagram-btn {
+    background: linear-gradient(45deg, #833ab4, #fd1d1d, #fcb045);
+    color: white;
+    &:hover {
+      background: linear-gradient(45deg, #9d4eca, #fd3535, #fcc055);
+    }
+  }
+
+  .youtube-btn {
+    background-color: #ff0000;
+    color: white;
+    &:hover {
+      background-color: #cc0000;
+    }
+  }
+
+  // Featured Content Cards
+  .content-card {
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+
+      img {
+        transform: scale(1.1);
+      }
+    }
+
+    img {
+      transition: transform 0.6s ease;
+    }
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .social-platforms {
+      grid-template-columns: repeat(1, 1fr);
+    }
+    
+    .featured-content {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+}
+
+// Animated Section Underline
+.animated-underline {
+  display: inline-block;
+  position: relative;
+  
+  .underline-animation {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background: linear-gradient(to right, #3b82f6, #8b5cf6);
+    transition: all 0.7s ease;
+    opacity: 0;
+    border-radius: 9999px;
+  }
+  
+  &:hover .underline-animation {
+    width: 100%;
+    opacity: 1;
+  }
+}
+
+// Pattern and background elements
+.pattern-dots {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.bg-grid-pattern {
+  background-image: linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                  linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+
+// Social CTA Buttons
+.social-cta-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 9999px;
+  height: 3.5rem;
+  width: 12rem;
+  transition: all 0.3s ease;
+  transform: translateY(0);
+  
+  &:hover {
+    transform: translateY(-5px);
+  }
+  
+  .social-cta-btn-bg {
+    position: absolute;
+    inset: 0;
+    transition: all 0.3s ease;
+  }
+  
+  .social-cta-btn-content {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    gap: 0.75rem;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .social-cta-btn-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 9999px;
+    transition: all 0.3s ease;
+  }
+}
+
+// Shadow Glow Effects
+.shadow-glow-blue {
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+}
+
+.shadow-glow-red {
+  box-shadow: 0 0 15px rgba(239, 68, 68, 0.5);
+}
+
+.shadow-glow-pink {
+  box-shadow: 0 0 15px rgba(219, 39, 119, 0.5);
+}
+
+.text-shadow-glow {
+  text-shadow: 0 0 8px rgba(96, 165, 250, 0.6);
+}
+
+// Animations
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes rotate-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.rotate-slow {
+  animation: rotate-slow 30s linear infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.delay-1000 {
+  animation-delay: 1s;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}

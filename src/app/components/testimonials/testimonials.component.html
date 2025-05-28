@@ -1,0 +1,123 @@
+<section class="testimonials-section py-20" id="testimonials">
+  <!-- Fixed background with glowing effects -->
+  <div class="bg-effects">
+    <div class="glow-circle glow-circle-1"></div>
+    <div class="glow-circle glow-circle-2"></div>
+    <div class="glow-circle glow-circle-3"></div>
+    <div class="dot-pattern"></div>
+  </div>
+  
+  <div class="container mx-auto px-4 relative z-10">
+    <!-- Section Header -->
+    <div class="header-container">
+      <h2 class="section-title">
+        <span class="title-text">Reviews & Feedback</span>
+        <span class="title-underline"></span>
+      </h2>
+      <p class="section-subtitle">
+        Discover what my community says about my content and educational videos
+      </p>
+    </div>
+
+    <!-- Verified Badge -->
+    <div class="verified-badge-container">
+      <div class="verified-badge">
+        <div class="facebook-icon">
+          <fa-icon [icon]="['fab', 'facebook-f']"></fa-icon>
+        </div>
+        <div class="badge-text">
+          <h3>Verified Reviews</h3>
+          <p>From Facebook Community</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Testimonial Cards Carousel -->
+    <div class="testimonial-carousel-container">
+      <!-- Display testimonials using owl-carousel when ready -->
+      <div *ngIf="isCarouselReady">
+        <owl-carousel-o [options]="customOptions">
+          <ng-template carouselSlide *ngFor="let testimonial of testimonials; let i = index">
+            <div class="testimonial-card">
+              <div class="card-inner">
+                <!-- Facebook Badge -->
+                <div class="card-badge">
+                  <fa-icon [icon]="['fab', 'facebook-f']"></fa-icon>
+                </div>
+                
+                <!-- Quote Icon -->
+                <div class="quote-icon">
+                  <fa-icon [icon]="['fas', 'quote-left']"></fa-icon>
+                </div>
+
+                <!-- Review Content -->
+                <div class="review-content">
+                  <p>{{ testimonial.review }}</p>
+                </div>
+
+                <!-- Reviewer Info -->
+                <div class="reviewer-info">
+                  <div class="reviewer-image-wrap">
+                    <img [src]="testimonial.profileImage" [alt]="testimonial.name">
+                    <div class="image-glow"></div>
+                  </div>
+                  <div class="reviewer-details">
+                    <h3>{{ testimonial.name }}</h3>
+                    <div class="rating">
+                      <fa-icon [icon]="['fas', 'star']" *ngFor="let star of [].constructor(testimonial.rating)"></fa-icon>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </owl-carousel-o>
+      </div>
+      
+      <!-- Fallback if carousel doesn't initialize properly -->
+      <div *ngIf="!isCarouselReady" class="testimonial-grid">
+        <div class="testimonial-card" *ngFor="let testimonial of testimonials; let i = index">
+          <div class="card-inner">
+            <!-- Facebook Badge -->
+            <div class="card-badge">
+              <fa-icon [icon]="['fab', 'facebook-f']"></fa-icon>
+            </div>
+            
+            <!-- Quote Icon -->
+            <div class="quote-icon">
+              <fa-icon [icon]="['fas', 'quote-left']"></fa-icon>
+            </div>
+
+            <!-- Review Content -->
+            <div class="review-content">
+              <p>{{ testimonial.review }}</p>
+            </div>
+
+            <!-- Reviewer Info -->
+            <div class="reviewer-info">
+              <div class="reviewer-image-wrap">
+                <img [src]="testimonial.profileImage" [alt]="testimonial.name">
+                <div class="image-glow"></div>
+              </div>
+              <div class="reviewer-details">
+                <h3>{{ testimonial.name }}</h3>
+                <div class="rating">
+                  <fa-icon [icon]="['fas', 'star']" *ngFor="let star of [].constructor(testimonial.rating)"></fa-icon>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Call to action -->
+    <div class="cta-container">
+      <p>Join the community to share your experience</p>
+      <a href="https://facebook.com/rudraxyt" target="_blank" class="cta-button">
+        <fa-icon [icon]="['fab', 'facebook']"></fa-icon>
+        Follow on Facebook
+      </a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,79 @@
+<section class="collaborations-container">
+  <!-- Background effects -->
+  <div class="bg-effects">
+    <div class="glow-circle glow-circle-1"></div>
+    <div class="glow-circle glow-circle-2"></div>
+    <div class="glow-circle glow-circle-3"></div>
+  </div>
+
+  <!-- Section Header -->
+  <div class="section-header">
+    <h2 class="section-title">
+      <fa-icon [icon]="faHandshake" class="icon-handshake"></fa-icon>
+      <span class="title-text">Brand Collaborations</span>
+      <span class="title-underline"></span>
+    </h2>
+    <p class="section-subtitle">Creating impactful content with leading brands</p>
+    <div class="collab-counter">
+      <div class="counter-value">4+</div>
+      <div class="counter-label">Brand Partnerships</div>
+    </div>
+  </div>
+
+  <!-- Cards Grid -->
+  <div class="cards-grid">
+    <div *ngFor="let key of objectKeys(collaborations)" class="collab-card">
+      <div class="card-inner" (click)="toggleCard(key)">
+        <div class="card-content">
+          <img [src]="collaborations[key].logoUrl" [alt]="collaborations[key].title" class="brand-logo">
+          <h3 class="collab-title">{{ collaborations[key].title }}</h3>
+          <span class="collab-type">{{ collaborations[key].type }}</span>
+          <p class="collab-description">{{ collaborations[key].description }}</p>
+          <button class="view-details">
+            View Details
+            <fa-icon [icon]="faChevronDown" class="icon"></fa-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3D Modal -->
+  <div class="modal-overlay" *ngIf="selectedCollab" (click)="closeModal()">
+    <div class="modal-container" (click)="$event.stopPropagation()">
+      <div class="modal-content">
+        <button class="close-button" (click)="closeModal()">
+          <fa-icon [icon]="faTimes"></fa-icon>
+        </button>
+
+        <div class="modal-header">
+          <img [src]="selectedCollab.logoUrl" [alt]="selectedCollab.title" class="brand-logo">
+          <h2 class="brand-title">{{ selectedCollab.title }}</h2>
+        </div>
+
+        <div class="modal-body">
+          <h3 class="section-title">About the Collaboration</h3>
+          <p class="description-text">{{ selectedCollab.fullDescription }}</p>
+
+          <h3 class="section-title">Key Highlights</h3>
+          <div class="highlights-grid">
+            <div class="highlight-card" *ngFor="let highlight of selectedCollab.highlights; let i = index"
+                 [style.animation-delay]="i * 0.1 + 's'">
+              <div class="highlight-icon">
+                <fa-icon [icon]="faStar"></fa-icon>
+              </div>
+              <p class="highlight-text">{{ highlight }}</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <a [href]="selectedCollab.videoUrl" target="_blank" class="watch-campaign-btn">
+            <fa-icon [icon]="faPlayCircle"></fa-icon>
+            Watch Campaign
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,16 @@
+<div class="projects-container">
+    <h2 class="text-4xl font-bold text-center mb-8 text-white">
+      My Content Creation Journey
+    </h2>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" @fadeInUp>
+      <div *ngFor="let project of projects" class="project-card">
+        <img [src]="project.image" [alt]="project.title" class="project-image" />
+        <div class="project-details">
+          <h3 class="text-xl font-semibold text-white">{{ project.title }}</h3>
+          <p class="text-gray-400">{{ project.description }}</p>
+          <a [href]="project.link" target="_blank" class="btn">View More</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,161 @@
+import { Component, OnInit } from '@angular/core';
+import { trigger, transition, style, animate, state } from '@angular/animations';
+import { 
+  faRocket, 
+  faChartLine, 
+  faLightbulb, 
+  faUsers, 
+  faCode, 
+  faMobile, 
+  faGlobe,
+  faHandshake,
+  faPlayCircle,
+  faFire,
+  faPalette,
+  faSpinner,
+  IconDefinition
+} from '@fortawesome/free-solid-svg-icons';
+
+interface RoadmapItem {
+  year: number;
+  month: string;
+  title: string;
+  description: string;
+  icon: IconDefinition;
+  completed: boolean;
+  animationState?: string;
+}
+
+@Component({
+  selector: 'app-roadmap',
+  templateUrl: './roadmap.component.html',
+  styleUrls: ['./roadmap.component.scss'],
+  animations: [
+    trigger('fadeInUp', [
+      state('void', style({
+        opacity: 0,
+        transform: 'translateY(20px)'
+      })),
+      transition(':enter', [
+        animate('0.6s ease-out')
+      ])
+    ]),
+    trigger('timelineItem', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateX(-50px)' }),
+        animate('0.6s 0.3s ease-out', style({ opacity: 1, transform: 'translateX(0)' }))
+      ])
+    ]),
+    trigger('timelineDot', [
+      state('void', style({ transform: 'scale(0)' })),
+      state('*', style({ transform: 'scale(1)' })),
+      transition('void => *', [
+        animate('0.6s cubic-bezier(0.4, 0, 0.2, 1)')
+      ])
+    ])
+  ]
+})
+export class RoadmapComponent implements OnInit {
+  // Font Awesome Icons
+  faRocket = faRocket;
+  faChartLine = faChartLine;
+  faLightbulb = faLightbulb;
+  faUsers = faUsers;
+  faCode = faCode;
+  faMobile = faMobile;
+  faGlobe = faGlobe;
+  faHandshake = faHandshake;
+  faPlayCircle = faPlayCircle;
+  faFire = faFire;
+  faPalette = faPalette;
+  faSpinner = faSpinner;
+
+  roadmapItems: RoadmapItem[] = [
+    {
+      year: 2020,
+      month: 'January',
+      title: 'Started My Journey',
+      description: 'Began creating content and building my online presence.',
+      icon: this.faRocket,
+      completed: true
+    },
+    {
+      year: 2020,
+      month: 'Jun',
+      title: 'First Brand Collaboration',
+      description: 'Partnered with local brands for content creation.',
+      icon: this.faHandshake,
+      completed: true
+    },
+    {
+      year: 2021,
+      month: 'Mar',
+      title: 'Reached 10K Followers',
+      description: 'Achieved 10,000 followers across social media platforms.',
+      icon: this.faUsers,
+      completed: true
+    },
+    {
+      year: 2021,
+      month: 'Sep',
+      title: 'Launched YouTube Channel',
+      description: 'Started creating video content on YouTube.',
+      icon: this.faPlayCircle,
+      completed: true
+    },
+    {
+      year: 2022,
+      month: 'Feb',
+      title: 'First Viral Content',
+      description: 'Created content that went viral, reaching over 1M views.',
+      icon: this.faFire,
+      completed: true
+    },
+    {
+      year: 2022,
+      month: 'Oct',
+      title: 'Established Brand Identity',
+      description: 'Developed a consistent brand image and style guide.',
+      icon: this.faPalette,
+      completed: true
+    },
+    {
+      year: 2023,
+      month: 'Present',
+      title: 'Ongoing Projects',
+      description: 'Working on exciting new collaborations and content series.',
+      icon: this.faSpinner,
+      completed: false
+    },
+    {
+      year: 2023,
+      month: 'Future',
+      title: 'Expanding Horizons',
+      description: 'Planning to explore new platforms and content formats.',
+      icon: this.faGlobe,
+      completed: false
+    }
+  ];
+
+  constructor() { }
+
+  ngOnInit(): void {
+    // Initialize animation states
+    this.roadmapItems = this.roadmapItems.map(item => ({
+      ...item,
+      animationState: 'inactive'
+    }));
+  }
+
+  getFilteredRoadmap(): RoadmapItem[] {
+    return this.roadmapItems.filter(item => item.completed);
+  }
+
+  getUpcomingRoadmap(): RoadmapItem[] {
+    return this.roadmapItems.filter(item => !item.completed);
+  }
+
+  trackByFn(index: number, item: RoadmapItem): number {
+    return index;
+  }
+}

@@ -1,0 +1,781 @@
+/* Cyberpunk Roadmap Keyframe Animations */
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@keyframes scanner {
+  0% { top: -100%; }
+  100% { top: 100%; }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 5px var(--milestone-color, rgba(59, 130, 246, 0.7)); }
+  50% { transform: scale(1.05); box-shadow: 0 0 15px var(--milestone-color, rgba(59, 130, 246, 0.9)); }
+}
+
+@keyframes neon-pulse {
+  0%, 100% { filter: drop-shadow(0 0 2px rgba(59, 130, 246, 0.7)) drop-shadow(0 0 5px rgba(59, 130, 246, 0.5)); }
+  50% { filter: drop-shadow(0 0 5px rgba(59, 130, 246, 0.9)) drop-shadow(0 0 10px rgba(59, 130, 246, 0.7)); }
+}
+
+@keyframes glitch {
+  0%, 100% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+}
+
+@keyframes roadFlicker {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Cyber Roadmap Component Styles */
+.cyber-roadmap-section {
+  padding: 8rem 0;
+  background-color: #0c1016;
+  position: relative;
+  overflow: hidden;
+  color: #edf2f7;
+  min-height: 100vh;
+  width: 100%;
+  display: block;
+
+  // Background cyber grid
+  .cyber-grid {
+    background-image: linear-gradient(rgba(45, 55, 72, 0.2) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(45, 55, 72, 0.2) 1px, transparent 1px);
+    background-size: 40px 40px;
+    width: 100%;
+    height: 100%;
+  }
+
+  // Ambient glow effects
+  .cyber-glow-1 {
+    position: absolute;
+    top: 20%;
+    left: 5%;
+    width: 40%;
+    height: 60%;
+    background: radial-gradient(circle, rgba(56, 189, 248, 0.2) 0%, rgba(59, 130, 246, 0.05) 30%, transparent 70%);
+    filter: blur(60px);
+    opacity: 0.5;
+    z-index: 1;
+  }
+
+  .cyber-glow-2 {
+    position: absolute;
+    top: 30%;
+    right: 5%;
+    width: 30%;
+    height: 50%;
+    background: radial-gradient(circle, rgba(168, 85, 247, 0.2) 0%, rgba(139, 92, 246, 0.05) 30%, transparent 70%);
+    filter: blur(60px);
+    opacity: 0.5;
+    z-index: 1;
+  }
+
+  // Header styles
+  .cyber-header {
+    text-align: center;
+    margin-bottom: 6rem;
+    position: relative;
+
+    .cyber-text-glitch {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 3.5rem;
+      font-weight: 800;
+      background: linear-gradient(to right, #38bdf8, #818cf8, #c084fc, #818cf8, #38bdf8);
+      background-size: 200% auto;
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      position: relative;
+      display: inline-block;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      animation: shimmer 6s linear infinite;
+
+      &::before, &::after {
+        content: attr(data-text);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+      }
+
+      &::before {
+        color: #00fffc;
+        opacity: 0.2;
+        transform: translateX(-2px);
+        animation: glitch 0.3s infinite;
+      }
+
+      &::after {
+        color: #ff00ff;
+        opacity: 0.2;
+        transform: translateX(2px);
+        animation: glitch 0.3s 0.1s infinite reverse;
+      }
+    }
+
+    .cyber-line {
+      width: 120px;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, #38bdf8, #818cf8, #c084fc, #818cf8, #38bdf8, transparent);
+      margin: 1.5rem auto;
+      position: relative;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: -3px;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.8), transparent);
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -3px;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(192, 132, 252, 0.8), transparent);
+      }
+    }
+
+    .cyber-subtitle {
+      color: #a0aec0;
+      font-family: 'Rajdhani', sans-serif;
+      letter-spacing: 1px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cyber-badge {
+      background: rgba(56, 189, 248, 0.1);
+      color: #38bdf8;
+      font-size: 0.75rem;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+  }
+  
+  /* Cyber Road Path */
+  .cyber-roadmap-container {
+    position: relative;
+    max-width: 1200px;
+    margin: 4rem auto 0;
+    padding: 0 1.5rem;
+    z-index: 10;
+    
+    // Digital road path
+    .cyber-road-path {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 8px;
+      height: 100%;
+      transform: translateX(-50%);
+      background: linear-gradient(to bottom, 
+        rgba(56, 189, 248, 0.05), 
+        rgba(56, 189, 248, 0.8), 
+        rgba(139, 92, 246, 0.8), 
+        rgba(59, 130, 246, 0.05));
+      border-radius: 4px;
+      overflow: hidden;
+      z-index: 1;
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.5);
+      animation: roadEntrance 1s ease-out forwards;
+      
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, 
+          transparent 0%, 
+          rgba(56, 189, 248, 0.2) 25%, 
+          rgba(56, 189, 248, 0.2) 75%, 
+          transparent 100%);
+        animation: roadFlicker 3s infinite;
+      }
+      
+      .road-scanner {
+        position: absolute;
+        width: 100%;
+        height: 30px;
+        background: linear-gradient(to bottom, 
+          rgba(56, 189, 248, 0.8), 
+          rgba(255, 255, 255, 0.6), 
+          rgba(56, 189, 248, 0.8));
+        filter: blur(10px);
+        opacity: 0.7;
+        animation: scanner 8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+      }
+    }
+    
+    // Year markers along the path
+    .cyber-year-marker {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      text-align: center;
+      z-index: 3;
+      
+      .year-node {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(139, 92, 246, 0.2));
+        border: 2px solid rgba(56, 189, 248, 0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        position: relative;
+        box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+        
+        &::before {
+          content: '';
+          position: absolute;
+          width: 24px;
+          height: 24px;
+          border-radius: 50%;
+          background: rgba(29, 78, 216, 0.3);
+          box-shadow: 0 0 5px rgba(56, 189, 248, 0.5) inset;
+        }
+        
+        &::after {
+          content: '';
+          position: absolute;
+          width: 12px;
+          height: 12px;
+          border-radius: 50%;
+          background: rgba(56, 189, 248, 0.8);
+          box-shadow: 0 0 10px rgba(56, 189, 248, 0.8);
+        }
+      }
+      
+      .year-text {
+        font-family: 'Rajdhani', sans-serif;
+        font-weight: 700;
+        font-size: 1rem;
+        color: #e2e8f0;
+        margin-top: 0.5rem;
+        background: rgba(15, 23, 42, 0.8);
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        border: 1px solid rgba(56, 189, 248, 0.3);
+        box-shadow: 0 0 5px rgba(56, 189, 248, 0.3);
+      }
+      
+      &.animate {
+        .year-node {
+          animation: pulse 2s infinite;
+        }
+      }
+    }
+    
+    // Milestone styles
+    .cyber-milestone {
+      position: absolute;
+      width: calc(50% - 50px);
+      padding: 1.5rem;
+      border-radius: 8px;
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      z-index: 2;
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 0 20px rgba(56, 189, 248, 0.1);
+      --milestone-color: #38bdf8;
+      
+      &.left {
+        left: 0;
+        
+        &::after {
+          content: '';
+          position: absolute;
+          right: -50px;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 50px;
+          height: 3px;
+          background: linear-gradient(90deg, var(--milestone-color, rgba(56, 189, 248, 0.8)), rgba(56, 189, 248, 0.3));
+          z-index: 1;
+          box-shadow: 0 0 8px var(--milestone-color, rgba(56, 189, 248, 0.5));
+        }
+      }
+      
+      &.right {
+        right: 0;
+        margin-left: auto;
+        
+        &::after {
+          content: '';
+          position: absolute;
+          left: -50px;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 50px;
+          height: 3px;
+          background: linear-gradient(90deg, rgba(56, 189, 248, 0.3), var(--milestone-color, rgba(56, 189, 248, 0.8)));
+          z-index: 1;
+          box-shadow: 0 0 8px var(--milestone-color, rgba(56, 189, 248, 0.5));
+        }
+      }
+      
+      &.in-view {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      
+      .milestone-icon {
+        position: relative;
+        width: 54px;
+        height: 54px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, rgba(15, 23, 42, 0.8), rgba(30, 41, 59, 0.8));
+        margin-bottom: 1rem;
+        border: 2px solid var(--milestone-color, rgba(56, 189, 248, 0.5));
+        box-shadow: 0 0 10px var(--milestone-color, rgba(56, 189, 248, 0.3));
+        animation: pulse 2s infinite;
+        
+        &::before {
+          content: '';
+          position: absolute;
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          background: rgba(15, 23, 42, 0.4);
+          border: 1px solid rgba(56, 189, 248, 0.3);
+        }
+        
+        fa-icon {
+          color: var(--milestone-color, #38bdf8);
+          font-size: 1.5rem;
+          filter: drop-shadow(0 0 5px var(--milestone-color, rgba(56, 189, 248, 0.7)));
+          animation: neon-pulse 2s infinite;
+        }
+      }
+      
+      .milestone-date {
+        font-family: 'Rajdhani', sans-serif;
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--milestone-color, #38bdf8);
+        margin-bottom: 0.5rem;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+      
+      .milestone-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #e2e8f0;
+        margin-bottom: 0.5rem;
+      }
+      
+      .milestone-description {
+        font-size: 0.95rem;
+        color: #a0aec0;
+        line-height: 1.6;
+      }
+      
+      .milestone-badge {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: rgba(56, 189, 248, 0.1);
+        color: var(--milestone-color, #38bdf8);
+        font-size: 0.7rem;
+        padding: 0.25rem 0.6rem;
+        border-radius: 4px;
+        font-weight: 700;
+        border: 1px solid rgba(56, 189, 248, 0.3);
+        box-shadow: 0 0 8px rgba(56, 189, 248, 0.2);
+        letter-spacing: 0.5px;
+        font-family: 'Rajdhani', sans-serif;
+        text-transform: uppercase;
+        
+        &.completed {
+          background: rgba(74, 222, 128, 0.1);
+          color: #4ade80;
+          border-color: rgba(74, 222, 128, 0.3);
+          box-shadow: 0 0 8px rgba(74, 222, 128, 0.2);
+        }
+      }
+      
+      .milestone-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #e2e8f0;
+        margin-bottom: 0.75rem;
+        font-family: 'Rajdhani', sans-serif;
+        letter-spacing: 0.5px;
+        text-shadow: 0 0 5px rgba(56, 189, 248, 0.3);
+      }
+      
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(56, 189, 248, 0.15);
+        
+        .milestone-icon {
+          animation: pulse 1s infinite;
+        }
+      }
+    }
+  }
+}
+
+// Media queries for responsive design
+@media (max-width: 768px) {
+  .cyber-roadmap-container {
+    .cyber-milestone {
+      width: calc(100% - 30px);
+      margin-left: 30px;
+      
+      &.left, &.right {
+        right: auto;
+        left: 0;
+        
+        &::after {
+          left: -30px;
+          right: auto;
+          background: linear-gradient(90deg, transparent, var(--milestone-color, rgba(56, 189, 248, 0.8)));
+        }
+      }
+    }
+    
+    .cyber-road-path {
+      left: 15px;
+      transform: none;
+    }
+    
+    .cyber-year-marker {
+      left: 15px;
+      transform: none;
+      text-align: left;
+      
+      .year-node {
+        margin: 0;
+      }
+    }
+  }
+}
+
+// Additional utility classes
+.glow-text {
+  text-shadow: 0 0 5px currentColor;
+}
+
+.neon-border {
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.5), 0 0 20px rgba(56, 189, 248, 0.3);
+}
+
+.milestone-dot {
+  position: absolute;
+  top: 30px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #6c63ff, #ff6b6b);
+  color: white;
+  z-index: 3;
+  box-shadow: 0 5px 15px rgba(108, 99, 255, 0.3);
+  transition: all 0.3s ease;
+
+  .milestone-icon {
+    font-size: 1rem;
+  }
+
+  &.completed {
+    background: linear-gradient(135deg, #4CAF50, #8BC34A);
+  }
+}
+
+.milestone-content {
+  .milestone-date {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #6c63ff;
+    margin-bottom: 0.5rem;
+    padding: 0.2rem 0.8rem;
+    background: rgba(108, 99, 255, 0.1);
+    border-radius: 20px;
+  }
+
+  .milestone-title {
+    font-size: 1.3rem;
+    margin: 0.5rem 0;
+    color: #2c3e50;
+  }
+
+  .milestone-description {
+    color: #7f8c8d;
+    line-height: 1.6;
+    margin: 0;
+  }
+}
+
+.upcoming-milestones {
+  margin-top: 4rem;
+  text-align: center;
+
+  .upcoming-title {
+    font-size: 1.8rem;
+    color: #2c3e50;
+    margin-bottom: 2rem;
+    position: relative;
+    display: inline-block;
+
+    &::after {
+      content: '';
+      position: absolute;
+      width: 60%;
+      height: 3px;
+      background: linear-gradient(90deg, #6c63ff, #ff6b6b);
+      bottom: -8px;
+      left: 20%;
+      border-radius: 2px;
+    }
+  }
+}
+
+.upcoming-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.upcoming-item {
+  flex: 1 1 300px;
+  max-width: 350px;
+  background: white;
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .upcoming-dot {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #6c63ff, #ff6b6b);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    flex-shrink: 0;
+    box-shadow: 0 5px 15px rgba(108, 99, 255, 0.3);
+  }
+
+  .upcoming-content {
+    text-align: left;
+
+    .upcoming-item-title {
+      font-size: 1.1rem;
+      color: #2c3e50;
+      margin: 0 0 0.5rem;
+    }
+
+    .upcoming-item-description {
+      color: #7f8c8d;
+      font-size: 0.9rem;
+      margin: 0;
+      line-height: 1.5;
+    }
+  }
+}
+
+// Responsive Styles
+@media (max-width: 992px) {
+  .milestone {
+    width: calc(50% - 30px);
+  }
+}
+
+/* Enhanced timeline animations */
+.roadmap-item {
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  
+  &:hover {
+    transform: translateY(-5px);
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 3s infinite linear;
+}
+
+/* Year marker animations */
+.year-marker {
+  transition: all 0.4s ease;
+  
+  &:hover {
+    transform: translateY(-5px) scale(1.1) translateX(-50%);
+  }
+  
+  &.animate-pulse {
+    animation: pulse 2s infinite ease-in-out;
+  }
+  
+  div {
+    transition: all 0.3s ease;
+    animation: glowBorder 3s infinite;
+    
+    &:hover {
+      border-color: #8B5CF6;
+    }
+  }
+}
+
+/* Progress bar animation */
+.h-2\.5 {
+  position: relative;
+  overflow: hidden;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 30%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    animation: shimmer 2s infinite;
+  }
+}
+
+/* Timeline line glow effect */
+.absolute.left-1\/2.w-1.h-full {
+  position: relative;
+  overflow: visible;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 5px;
+    height: 100%;
+    background: radial-gradient(ellipse at center, rgba(139, 92, 246, 0.3) 0%, transparent 70%);
+    z-index: -1;
+    filter: blur(5px);
+  }
+}
+
+@media (max-width: 768px) {
+  .milestone {
+    width: 100%;
+    left: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    text-align: left !important;
+    padding-left: 60px;
+    padding-right: 20px;
+
+    .milestone-dot {
+      left: 10px !important;
+      right: auto !important;
+    }
+  }
+
+  .timeline-line {
+    left: 30px !important;
+  }
+}
+
+/* Animation keyframes */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* Animation classes */
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Smooth scrolling for anchor links */nhtml {
+  scroll-behavior: smooth;
+  
+  @media (prefers-reduced-motion: reduce) {
+    scroll-behavior: auto;
+  }
+}
+
+/* Print styles */
+@media print {
+  .bg-white {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  
+  .relative::before {
+    display: none;
+  }
+  
+  .absolute.left-1\/2 {
+    position: relative !important;
+    left: 0 !important;
+    transform: none !important;
+    margin: 1rem 0 !important;
+    border: 1px solid #e5e7eb !important;
+  }
+}

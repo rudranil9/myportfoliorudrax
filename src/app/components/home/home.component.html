@@ -1,0 +1,15 @@
+<div class="home-container cyber-grid">
+  <!-- Navigation Links -->
+  <nav class="sticky-nav">
+    <a href="#hero" class="nav-link" [class.active]="isActive('home')" (click)="scrollToSection('hero', $event)">Home</a>
+    <a href="#about" class="nav-link" [class.active]="isActive('about')" (click)="scrollToSection('about', $event)">About</a>
+    <a href="#timeline" class="nav-link" [class.active]="isActive('timeline')" (click)="scrollToSection('timeline', $event)">Journey</a>
+    <a href="#social" class="nav-link" [class.active]="isActive('social')" (click)="scrollToSection('social', $event)">Social</a>
+    <a href="#testimonials" class="nav-link" [class.active]="isActive('testimonials')" (click)="scrollToSection('testimonials', $event)">Testimonials</a>
+    <a href="#collaborations" class="nav-link" [class.active]="isActive('collaborations')" (click)="scrollToSection('collaborations', $event)">Work</a>
+    <a href="#contact" class="nav-link" [class.active]="isActive('contact')" (click)="scrollToSection('contact', $event)">Contact</a>
+  </nav>
+  
+  <!-- Content will be loaded by the parent component -->
+  <ng-content></ng-content>
+</div>

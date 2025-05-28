@@ -1,0 +1,50 @@
+<section class="about-section" id="about">
+  <div class="container mx-auto px-4 py-16 text-white">
+    <h2 class="text-4xl font-bold text-center mb-4">About Me</h2>
+    <p class="text-lg text-center mb-12 max-w-3xl mx-auto">
+      I'm Rudranil – an infotainment content creator passionate about making complex topics accessible and entertaining. 
+      With a growing community across Facebook, YouTube, and Instagram, I strive to create content that educates, inspires, and engages.
+    </p>
+
+    <!-- Journey section removed as requested -->
+
+    <!-- Skills Section -->
+    <div class="skills-section">
+      <h3 class="text-2xl font-semibold text-center mb-10">My Skills</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div *ngFor="let skill of skills" class="skill-item">
+          <div class="flex justify-between mb-2">
+            <span class="font-medium text-lg">{{skill.name}}</span>
+            <span class="text-blue-400 font-semibold">{{skill.level}}%</span>
+          </div>
+          <div class="skill-bar h-3 bg-gray-700 rounded-full overflow-hidden">
+            <div class="skill-bar-fill h-full bg-blue-500 rounded-full" [style.width.%]="skill.level"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content Creator Stats -->
+    <div class="content-stats mt-20">
+      <h3 class="text-2xl font-semibold text-center mb-10">Content Creation Stats</h3>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
+        <div class="stat-card bg-gray-800 bg-opacity-50 p-6 rounded-lg shadow-lg border border-gray-700 text-center">
+          <div class="text-4xl font-bold text-blue-400 mb-2">280+</div>
+          <div class="text-lg">Videos Created</div>
+        </div>
+        <div class="stat-card bg-gray-800 bg-opacity-50 p-6 rounded-lg shadow-lg border border-gray-700 text-center">
+          <div class="text-4xl font-bold text-blue-400 mb-2">50M+</div>
+          <div class="text-lg">Total Lifetime Reach</div>
+        </div>
+        <div class="stat-card bg-gray-800 bg-opacity-50 p-6 rounded-lg shadow-lg border border-gray-700 text-center">
+          <div class="text-4xl font-bold text-blue-400 mb-2">4+</div>
+          <div class="text-lg">Major Brand Collaborations</div>
+        </div>
+        <div class="stat-card bg-gray-800 bg-opacity-50 p-6 rounded-lg shadow-lg border border-gray-700 text-center">
+          <div class="text-4xl font-bold text-blue-400 mb-2">3</div>
+          <div class="text-lg">Platforms</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
