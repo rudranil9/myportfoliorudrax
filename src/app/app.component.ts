@@ -54,7 +54,9 @@ export class AppComponent implements OnInit, OnDestroy {
   }
   
   private checkScrollPosition(): void {
-    this.showScrollButton = window.pageYOffset > this.scrollThreshold;
+    // Make sure we show the button when scrolled down
+    this.showScrollButton = window.scrollY > this.scrollThreshold;
+    console.log('Scroll position:', window.scrollY, 'Button visible:', this.showScrollButton);
   }
 
   @HostListener('window:scroll', ['$event'])
@@ -70,10 +72,31 @@ export class AppComponent implements OnInit, OnDestroy {
   }
   
   scrollToTop(): void {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
+    console.log('Scrolling to top');
+    // Using multiple methods for better cross-browser compatibility
+    try {
+      // Method 1
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+      
+      // Method 2 (for older browsers)
+      document.documentElement.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+      
+      // Method 3 (fallback)
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    } catch (e) {
+      // Fallback for very old browsers
+      window.scrollTo(0, 0);
+    }
+    
+    // Force update button visibility
+    setTimeout(() => this.checkScrollPosition(), 100);
   }
   
   ngOnDestroy(): void {

@@ -297,4 +297,12 @@ export class HeroComponent implements OnInit, OnDestroy {
   onScroll(event: Event): void {
     // Add any scroll-based effects here
   }
+
+  // Method to scroll to a specific section
+  scrollToSection(sectionId: string): void {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
 }

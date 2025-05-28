@@ -126,14 +126,14 @@
     
     <!-- CTA Buttons -->
     <div class="hero-buttons">
-      <a [routerLink]="['/projects']" fragment="featured" class="hero-btn primary-btn">
+      <a (click)="scrollToSection('collaborations')" class="hero-btn primary-btn cursor-pointer">
         <span class="btn-text">Explore My Work</span>
         <span class="btn-icon">
           <fa-icon [icon]="['fas', 'arrow-right']"></fa-icon>
         </span>
       </a>
       
-      <a [routerLink]="['/contact']" class="hero-btn secondary-btn">
+      <a (click)="scrollToSection('contact')" class="hero-btn secondary-btn cursor-pointer">
         <span class="btn-text">Get In Touch</span>
         <span class="btn-icon">
           <fa-icon [icon]="['fas', 'envelope']"></fa-icon>
